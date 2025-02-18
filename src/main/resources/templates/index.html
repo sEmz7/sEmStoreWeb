@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sEmStore - Главная</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+    <header>
+        <h1>sEmStore</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index">Главная</a></li>
+            <li><a href="about">О нас</a></li>
+            <li><a href="contact">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <h2>Лучший магазин оригинальной одежды!</h2>
+            <div class="box">У нас вы можете заказать любые оригинальные вещи по низкой цене.</div>
+    </main>
+    <div class="make-order"><a href="https://t.me/s3mmm_7"><button class="button">Сделать заказ</button></a></div>
+    <img src="/images/room.jpg" alt="" class="full-screen-image">
+    <img src="/images/warehouse.jpg" alt="" class="full-screen-image">
+
+<button class="support-button" onclick="toggleMenu()">Связаться</button>
+
+<div id="support-menu" class="support-menu">
+    <ul>
+        <li>Напишите нам в <a href="https://t.me/s3mmm_7">Telegram</a> </li>
+    </ul>
+</div>
+<script src="/static/js/script.js"></script>
+</body>
+</html>
