@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+    <header>
+        <h1>Авторизация</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index">Главная</a></li>
+            <li><a href="about">О нас</a></li>
+            <li><a href="contact">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <form id="auth-form" onsubmit="return validateForm()">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+            <span id="email-error" class="error-message"></span>
+            
+            <label for="password">Пароль</label>
+            <input type="password" id="password" name="password" required>
+            <span id="password-error" class="error-message"></span>
+            
+            <button type="submit">Войти</button>
+        </form>
+
+        <p>Нет аккаунта? <a href="register">Зарегистрироваться</a></p>
+    </main>
+
+    <button class="support-button" onclick="toggleMenu()">Связаться</button>
+    <div id="support-menu" class="support-menu">
+        <ul>
+            <li>Напишите нам в <a href="https://t.me/s3mmm_7">Telegram</a> </li>
+        </ul>
+    </div>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>
