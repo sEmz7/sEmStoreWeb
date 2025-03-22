@@ -1,6 +1,6 @@
 package com.example.semstore.controller;
 
-import com.example.semstore.entity.Order;
+import com.example.semstore.config.ConfigLoader;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,22 +12,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
 import java.net.URI;
-import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 @Controller
 public class MainController {
-    private Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private final String botToken = ConfigLoader.get("TELEGRAM_BOT_TOKEN");
+    private final String chatId = ConfigLoader.get("TELEGRAM_CHAT_ID");
 
-    @Value("${telegram.bot.token}")
-    private String botToken;
-
-    @Value("${telegram.chat.id}")
-    private String chatId;
 
     @GetMapping("/index")
     public String index() {
