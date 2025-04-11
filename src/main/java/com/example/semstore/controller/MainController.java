@@ -22,7 +22,6 @@ public class MainController {
     private final String botToken = ConfigLoader.get("TELEGRAM_BOT_TOKEN");
     private final String chatId = ConfigLoader.get("TELEGRAM_CHAT_ID");
 
-
     @GetMapping("/index")
     public String index() {
         return "index";
@@ -36,16 +35,6 @@ public class MainController {
     @GetMapping("/contact")
     public String contact() {
         return "contact";
-    }
-
-    @GetMapping("/register")
-    public String register() {
-        return "register";
-    }
-
-    @GetMapping("/login")
-    public String login() {
-        return "login";
     }
 
     @GetMapping("/order")

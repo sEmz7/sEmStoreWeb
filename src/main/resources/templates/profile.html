@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+    <header>
+        <h1>sEmStore</h1>
+    </header>
+<div th:replace="~{common/header :: header}"></div>
+
+    <a href="logout" class="logout-icon">
+        <img src="/images/logout.png" alt="logout">
+    </a>
+
+
+    <h1>Личный кабинет</h1>
+    <p>Имя: <span th:text="${user.name}"></span></p>
+    <p>Email: <span th:text="${user.email}"></span></p>
+
+    <div th:replace="~{common/footer :: footer}"></div>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>
