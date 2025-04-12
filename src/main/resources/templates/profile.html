@@ -14,11 +14,13 @@
     <a href="logout" class="logout-icon">
         <img src="/images/logout.png" alt="logout">
     </a>
-
-
     <h1>Личный кабинет</h1>
+<main>
     <p>Имя: <span th:text="${user.name}"></span></p>
     <p>Email: <span th:text="${user.email}"></span></p>
+</main>
+
+    <div class="make-order"><a href="order"><button class="button">Сделать заказ</button></a></div>
 
     <div th:replace="~{common/footer :: footer}"></div>
 

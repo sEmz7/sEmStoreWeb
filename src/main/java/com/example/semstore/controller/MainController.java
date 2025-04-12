@@ -1,6 +1,7 @@
 package com.example.semstore.controller;
 
 import com.example.semstore.config.ConfigLoader;
+import com.example.semstore.model.Order;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.stereotype.Controller;
@@ -44,17 +45,18 @@ public class MainController {
 
     @PostMapping("/api/order")
     @ResponseBody
-    public void orderSubmit(@RequestBody Map<String, String> orderData) {
+    public String orderSubmit(@RequestBody Order order) {
         String message = "📦 Новый заказ!\n\n"
-                + "1. Ссылка:   " + orderData.get("productLink") + "\n"
-                + "2. Размер:   " + orderData.get("size") + "\n"
-                + "3. Цвет:   " + orderData.get("color");
+                + "1. Ссылка:   " + order.getLink() + "\n"
+                + "2. Размер:   " + order.getSize() + "\n"
+                + "3. Цвет:   " + order.getColor();
 
         String jsonOrder = gson.toJson(Map.of(
                 "chat_id", chatId,
                 "text", message
         ));
         sendMessageToTelegram(jsonOrder);
+        return "profile";
     }
 
     private void sendMessageToTelegram(String jsonOrder) {
