@@ -10,19 +10,11 @@
 <header>
   <h1>sEmStore</h1>
 </header>
-<a href="register" class="auth-icon">
-  <img src="https://img.icons8.com/ios/50/000000/user.png" alt="Авторизация">
-</a>
-<nav>
-  <ul>
-    <li><a href="index">Главная</a></li>
-    <li><a href="about">О нас</a></li>
-    <li><a href="contact">Контакты</a></li>
-  </ul>
-</nav>
 
-  <h2>Форма заказа</h2>
-  <form id="order-form">
+    <div th:replace="~{common/header :: header}"></div>
+
+<h2>Форма заказа</h2>
+<form id="order-form">
     <label for="product-link">Ссылка на товар:</label>
     <input type="url" id="product-link" name="product-link" required>
 
@@ -33,14 +25,11 @@
     <input type="text" id="color" name="color" required>
 
     <button type="submit" class="button">Сделать заказ</button>
-  </form>
+</form>
 
 <button class="support-button" onclick="toggleMenu()">Связаться</button>
-<div id="support-menu" class="support-menu">
-  <ul>
-    <li>Напишите нам в <a href="https://t.me/s3mmm_7">Telegram</a></li>
-  </ul>
-</div>
+
+<div th:replace="~{common/footer :: footer}"></div>
 
 <script src="/js/order.js"></script>
 <script src="/js/script.js"></script>

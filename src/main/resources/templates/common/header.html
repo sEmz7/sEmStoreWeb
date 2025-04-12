@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+</head>
+<body>
+<div th:fragment="header">
+    <a href="profile" class="auth-icon">
+        <img src="/images/user.png" alt="Авторизация">
+    </a>
+  <nav>
+    <ul>
+      <li><a href="index">Главная</a></li>
+      <li><a href="about">О нас</a></li>
+      <li><a href="contact">Контакты</a></li>
+    </ul>
+  </nav>
+</div>
+</body>
+</html>

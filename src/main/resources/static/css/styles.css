@@ -190,6 +190,7 @@ button:active {
     transform: scale(1);
 }
 
+
 .auth-icon {
     position: fixed;
     top: 20px;
@@ -209,6 +210,29 @@ button:active {
 }
 
 .auth-icon img {
+    width: 25px;
+    height: 25px;
+}
+
+.logout-icon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.logout-icon:hover {
+    background-color: #818181;
+}
+
+.logout-icon img {
     width: 25px;
     height: 25px;
 }

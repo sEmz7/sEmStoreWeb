@@ -11,22 +11,16 @@
         <h1>Регистрация</h1>
     </header>
 
-    <nav>
-        <ul>
-            <li><a href="index">Главная</a></li>
-            <li><a href="about">О нас</a></li>
-            <li><a href="contact">Контакты</a></li>
-        </ul>
-    </nav>
+    <div th:replace="~{common/header :: header}"></div>
 
     <main>
-        <form id="auth-form" onsubmit="return validateForm()">
+        <form action="/register" method="post" id="auth-form" onsubmit="return validateForm() ">
             <label for="first-name">Имя</label>
-            <input type="text" id="first-name" name="first-name" required>
+            <input type="text" id="first-name" name="name" required>
             <span id="first-name-error" class="error-message"></span>
             
             <label for="last-name">Фамилия</label>
-            <input type="text" id="last-name" name="last-name" required>
+            <input type="text" id="last-name" name="lastname" required>
             <span id="last-name-error" class="error-message"></span>
             
             <label for="email">Email</label>
@@ -47,11 +41,8 @@
     </main>
 
     <button class="support-button" onclick="toggleMenu()">Связаться</button>
-    <div id="support-menu" class="support-menu">
-        <ul>
-            <li>Напишите нам в <a href="https://t.me/s3mmm_7">Telegram</a> </li>
-        </ul>
-    </div>
+
+    <div th:replace="~{common/footer :: footer}"></div>
 
     <script src="/js/script.js"></script>
 </body>
