@@ -2,9 +2,14 @@ package com.example.semstore.controller;
 
 import com.example.semstore.config.ConfigLoader;
 import com.example.semstore.model.Order;
+import com.example.semstore.model.User;
+import com.example.semstore.repository.OrderRepo;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +24,8 @@ import java.util.Map;
 
 @Controller
 public class MainController {
+    @Autowired
+    private OrderRepo orderRepo;
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private final String botToken = ConfigLoader.get("TELEGRAM_BOT_TOKEN");
     private final String chatId = ConfigLoader.get("TELEGRAM_CHAT_ID");
@@ -45,7 +52,9 @@ public class MainController {
 
     @PostMapping("/api/order")
     @ResponseBody
-    public String orderSubmit(@RequestBody Order order) {
+    public String orderSubmit(@RequestBody Order order, HttpSession session, Model model) {
+        User currentUser = (User) session.getAttribute("user");
+        order.setUserId(currentUser.getId());
         String message = "📦 Новый заказ!\n\n"
                 + "1. Ссылка:   " + order.getLink() + "\n"
                 + "2. Размер:   " + order.getSize() + "\n"
@@ -55,6 +64,7 @@ public class MainController {
                 "chat_id", chatId,
                 "text", message
         ));
+        orderRepo.save(order);
         sendMessageToTelegram(jsonOrder);
         return "profile";
     }

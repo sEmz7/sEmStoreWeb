@@ -9,12 +9,10 @@ public class SemstoreApplication {
 	public static void main(String[] args) {
 		Dotenv dotenv = Dotenv.load();
 
-		// Пример получения переменных
 		String dbPassword = dotenv.get("DB_PASSWORD");
 		String dbUrl = dotenv.get("DB_URL");
 		String dbUsername = dotenv.get("DB_USERNAME");
 
-		// Устанавливаем переменные в систему (если нужно)
 		System.setProperty("DB_PASSWORD", dbPassword);
 		System.setProperty("DB_URL", dbUrl);
 		System.setProperty("DB_USERNAME", dbUsername);

@@ -1,6 +1,8 @@
 package com.example.semstore.controller;
 
+import com.example.semstore.model.Order;
 import com.example.semstore.model.User;
+import com.example.semstore.repository.OrderRepo;
 import com.example.semstore.repository.UserRepo;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +13,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 public class UserController {
+
+    @Autowired
+    private OrderRepo orderRepo;
     @Autowired
     private UserRepo userRepo;
 
@@ -62,7 +69,9 @@ public class UserController {
         if (user == null) {
             return "login";
         }
+        List<Order> orders = orderRepo.findAllByUserId(user.getId());
         model.addAttribute("user", user);
+        model.addAttribute("orders", orders);
         return "profile";
     }
 

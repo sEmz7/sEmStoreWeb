@@ -6,24 +6,58 @@
     <link rel="stylesheet" th:href="@{/css/styles.css}"/>
 </head>
 <body>
-    <header>
-        <h1>sEmStore</h1>
-    </header>
+<header>
+    <h1>sEmStore</h1>
+</header>
+
 <div th:replace="~{common/header :: header}"></div>
 
-    <a href="logout" class="logout-icon">
-        <img src="/images/logout.png" alt="logout">
-    </a>
-    <h1>Личный кабинет</h1>
+<a href="logout" class="logout-icon">
+    <img src="/images/logout.png" alt="logout">
+</a>
+
 <main>
+    <h2>Личный кабинет</h2>
     <p>Имя: <span th:text="${user.name}"></span></p>
     <p>Email: <span th:text="${user.email}"></span></p>
 </main>
 
-    <div class="make-order"><a href="order"><button class="button">Сделать заказ</button></a></div>
+<div class="make-order">
+    <a href="order"><button class="button">Сделать заказ</button></a>
+</div>
 
-    <div th:replace="~{common/footer :: footer}"></div>
+<section>
+    <br>
+    <div th:if="${not #lists.isEmpty(orders)}">
+            <h3>Мои заказы</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>ID заказа</th>
+                <th>Ссылка на товар</th>
+                <th>Размер</th>
+                <th>Цвет</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order : ${orders}">
+                <td th:text="${order.id}"></td>
+                <td th:text="${order.link}"></td>
+                <td th:text="${order.size}"></td>
+                <td th:text="${order.color}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${#lists.isEmpty(orders)}">
+        <main>
+            <p>Здесь появятся ваши заказы. Создайте его по кнопке выше!</p>
+        </main>
+    </div>
+</section>
 
-    <script src="/js/script.js"></script>
+<div th:replace="~{common/footer :: footer}"></div>
+
+<script src="/js/script.js"></script>
 </body>
 </html>

@@ -2,7 +2,7 @@ document.getElementById("order-form").addEventListener("submit", function(event)
     event.preventDefault();
 
     const orderData = {
-        productLink: document.getElementById("product-link").value,
+        link: document.getElementById("link").value,
         size: document.getElementById("size").value,
         color: document.getElementById("color").value
     };
