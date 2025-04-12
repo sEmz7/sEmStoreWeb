@@ -58,7 +58,8 @@ public class MainController {
         String message = "📦 Новый заказ!\n\n"
                 + "1. Ссылка:   " + order.getLink() + "\n"
                 + "2. Размер:   " + order.getSize() + "\n"
-                + "3. Цвет:   " + order.getColor();
+                + "3. Цвет:   " + order.getColor() + "\n\n"
+                + "От пользователя '" + currentUser.getName() + "' с id: " + currentUser.getId();
 
         String jsonOrder = gson.toJson(Map.of(
                 "chat_id", chatId,
