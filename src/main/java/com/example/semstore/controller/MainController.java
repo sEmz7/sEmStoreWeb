@@ -46,7 +46,11 @@ public class MainController {
     }
 
     @GetMapping("/order")
-    public String order() {
+    public String order(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "login";
+        }
         return "order";
     }
 
