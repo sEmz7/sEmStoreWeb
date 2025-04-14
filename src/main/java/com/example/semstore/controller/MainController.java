@@ -59,17 +59,19 @@ public class MainController {
     public String orderSubmit(@RequestBody Order order, HttpSession session, Model model) {
         User currentUser = (User) session.getAttribute("user");
         order.setUserId(currentUser.getId());
+        orderRepo.save(order);
+
         String message = "📦 Новый заказ!\n\n"
-                + "1. Ссылка:   " + order.getLink() + "\n"
-                + "2. Размер:   " + order.getSize() + "\n"
-                + "3. Цвет:   " + order.getColor() + "\n\n"
+                + "1. ID заказа: " + order.getId() + "\n"
+                + "2. Ссылка: " + order.getLink() + "\n"
+                + "3. Размер: " + order.getSize() + "\n"
+                + "4. Цвет: " + order.getColor() + "\n\n"
                 + "От пользователя '" + currentUser.getName() + "' с id: " + currentUser.getId();
 
         String jsonOrder = gson.toJson(Map.of(
                 "chat_id", chatId,
                 "text", message
         ));
-        orderRepo.save(order);
         sendMessageToTelegram(jsonOrder);
         return "profile";
     }
