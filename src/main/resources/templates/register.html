@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h1>Регистрация</h1>
+        <h1 class="profile-h1-6">Регистрация</h1>
     </header>
 
     <div th:replace="~{common/header :: header}"></div>
@@ -40,7 +40,7 @@
         <p>Уже есть аккаунт? <a href="login">Войти</a></p>
     </main>
 
-    <button class="support-button" onclick="toggleMenu()">Связаться</button>
+    <button class="support-button" onclick="toggleMenu()"><div class="support-text">Связаться</div></button>
 
     <div th:replace="~{common/footer :: footer}"></div>
 

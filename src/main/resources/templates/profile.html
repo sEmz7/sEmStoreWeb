@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Profile</title>
+    <title>Личный кабинет</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}"/>
 </head>
 <body>
 <header>
-    <h1>sEmStore</h1>
+    <h1 class="profile-h1-6">Личный кабинет</h1>
 </header>
 
 <div th:replace="~{common/header :: header}"></div>
@@ -15,21 +15,20 @@
 <a href="logout" class="logout-icon">
     <img src="/images/logout.png" alt="logout">
 </a>
-
 <main>
-    <h2>Личный кабинет</h2>
-    <p>Имя: <span th:text="${user.name}"></span></p>
+    <p>Здравствуйте, <span th:text="${user.name}"></span>!</p>
     <p>Email: <span th:text="${user.email}"></span></p>
+    <div class="make-order">
+        <a href="order"><button class="button">Сделать заказ</button></a>
+    </div>
 </main>
 
-<div class="make-order">
-    <a href="order"><button class="button">Сделать заказ</button></a>
-</div>
+
 
 <section>
     <br>
     <div th:if="${not #lists.isEmpty(orders)}">
-            <h3>Мои заказы</h3>
+            <h2 class="profile-h1-6">Мои заказы</h2>
         <table>
             <thead>
             <tr>
@@ -56,7 +55,7 @@
     </div>
 </section>
 
-<button class="support-button" onclick="toggleMenu()">Связаться</button>
+<button class="support-button" onclick="toggleMenu()"><div class="support-text">Связаться</div></button>
 
 <div th:replace="~{common/footer :: footer}"></div>
 
