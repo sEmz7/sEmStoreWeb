@@ -1,31 +1,40 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
+  <meta charset="UTF-8" />
   <title>Posts</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sockjs-client/dist/sockjs.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/stompjs/lib/stomp.min.js"></script>
-  <script th:src="@{/js/posts.js}"></script> <!-- Подключение внешнего скрипта -->
+  <script th:src="@{/js/posts.js}"></script>
 </head>
 <body>
-<h2>Создать пост</h2>
-<textarea id="post-content"></textarea>
-<button onclick="createPost()">Опубликовать</button>
+<header>
+  <h1 class="profile-h1-6">sEmStore</h1>
+</header>
 
-<h2>Посты</h2>
-<div id="posts-container">
-  <div th:each="post : ${posts}" th:id="'post-' + ${post.id}">
-    <p th:text="${post.content}"></p>
+<div th:replace="~{common/header :: header}"></div>
 
-    <button th:onclick="'likePost(' + ${post.id} + ')'"
-            th:text="'👍 ' + ${post.likes}">👍</button>
-    <button th:onclick="'dislikePost(' + ${post.id} + ')'"
-            th:text="'👎 ' + ${post.dislikes}">👎</button>
-    <hr/>
+<main>
+  <h2>Создать пост</h2>
+  <textarea id="post-content"></textarea>
+  <button onclick="createPost()">Опубликовать</button>
+
+  <h2>Посты</h2>
+  <div id="posts-container">
+    <div th:each="post : ${posts}" th:id="'post-' + ${post.id}">
+      <p th:text="${post.content}"></p>
+
+      <button th:onclick="'likePost(' + ${post.id} + ')'"
+              th:text="'👍 ' + ${post.likes}">👍</button>
+      <button th:onclick="'dislikePost(' + ${post.id} + ')'"
+              th:text="'👎 ' + ${post.dislikes}">👎</button>
+      <hr/>
+    </div>
   </div>
-</div>
+</main>
 
-
-</div>
+<footer th:replace="~{common/footer :: footer}"></footer>
 </body>
 </html>
