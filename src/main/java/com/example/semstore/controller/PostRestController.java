@@ -52,7 +52,6 @@ public class PostRestController {
         Optional<Dislike> existingDislike = dislikesRepo.findByUserIdAndPostId(user.getId(), post.getId());
 
         if (existingLike.isPresent()) {
-            // Если лайк есть — удаляем его (снимаем лайк)
             likesRepo.delete(existingLike.get());
             post.setLikes(post.getLikes() - 1);
             postRepository.save(post);
@@ -60,13 +59,11 @@ public class PostRestController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
 
-        // Если был дизлайк — удаляем его и уменьшаем счётчик
         if (existingDislike.isPresent()) {
             dislikesRepo.delete(existingDislike.get());
             post.setDislikes(post.getDislikes() - 1);
         }
 
-        // Добавляем лайк и увеличиваем счётчик
         Like like = new Like();
         like.setUserId(user.getId());
         like.setPostId(post.getId());
@@ -95,7 +92,6 @@ public class PostRestController {
         Optional<Like> existingLike = likesRepo.findByUserIdAndPostId(user.getId(), post.getId());
 
         if (existingDislike.isPresent()) {
-            // Если дизлайк есть — удаляем его (снимаем дизлайк)
             dislikesRepo.delete(existingDislike.get());
             post.setDislikes(post.getDislikes() - 1);
             postRepository.save(post);
@@ -103,13 +99,11 @@ public class PostRestController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
 
-        // Если был лайк — удаляем его и уменьшаем счётчик
         if (existingLike.isPresent()) {
             likesRepo.delete(existingLike.get());
             post.setLikes(post.getLikes() - 1);
         }
 
-        // Добавляем дизлайк и увеличиваем счётчик
         Dislike dislike = new Dislike();
         dislike.setPostId(post.getId());
         dislike.setUserId(user.getId());
