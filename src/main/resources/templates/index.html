@@ -7,20 +7,20 @@
     <link rel="stylesheet" th:href="@{/css/styles.css}"/>
 </head>
 <body>
+    <img src="/images/room.jpg" alt="Background Image" class="background-image" />
     <header>
-        <h1>sEmStore</h1>
+        <h1 class="profile-h1-6">sEmStore</h1>
     </header>
     <div th:replace="~{common/header :: header}"></div>
 
     <main>
         <h2>Лучший магазин оригинальной одежды!</h2>
             <div class="box">У нас вы можете заказать любые оригинальные вещи по низкой цене.</div>
+        <div class="make-order"><a href="order"><button class="button">Сделать заказ</button></a></div>
     </main>
-    <div class="make-order"><a href="profile"><button class="button">Сделать заказ</button></a></div>
-    <img src="/images/room.jpg" alt="" class="full-screen-image">
-    <img src="/images/warehouse.jpg" alt="" class="full-screen-image">
 
-<button class="support-button" onclick="toggleMenu()">Связаться</button>
+
+<button class="support-button" onclick="toggleMenu()"><div class="support-text">Связаться</div></button>
 
     <div th:replace="~{common/footer :: footer}"></div>
 <script src="/js/script.js"></script>

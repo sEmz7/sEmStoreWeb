@@ -8,26 +8,26 @@
 </head>
 <body>
 <header>
-  <h1>sEmStore</h1>
+  <h1 class="profile-h1-6">sEmStore</h1>
 </header>
 
     <div th:replace="~{common/header :: header}"></div>
 
-<h2>Форма заказа</h2>
+<h2 class="profile-h1-6">Оформление заказа</h2>
 <form id="order-form">
-    <label for="link">Ссылка на товар:</label>
+    <label for="link" class="order-form-text">Ссылка на товар</label>
     <input type="url" id="link" name="link" required>
 
-    <label for="size">Размер:</label>
+    <label for="size" class="order-form-text">Размер</label>
     <input type="text" id="size" name="size" required>
 
-    <label for="color">Цвет:</label>
+    <label for="color" class="order-form-text">Цвет</label>
     <input type="text" id="color" name="color" required>
 
     <button type="submit" class="button">Сделать заказ</button>
 </form>
 
-<button class="support-button" onclick="toggleMenu()">Связаться</button>
+<button class="support-button" onclick="toggleMenu()"><div class="support-text">Связаться</div></button>
 
 <div th:replace="~{common/footer :: footer}"></div>
 

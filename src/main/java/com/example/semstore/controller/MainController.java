@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -46,29 +48,39 @@ public class MainController {
     }
 
     @GetMapping("/order")
-    public String order() {
+    public String order(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "login";
+        }
         return "order";
     }
 
     @PostMapping("/api/order")
     @ResponseBody
-    public String orderSubmit(@RequestBody Order order, HttpSession session, Model model) {
+    public ResponseEntity<Map<String, String>> orderSubmit(@RequestBody Order order, HttpSession session, Model model) {
         User currentUser = (User) session.getAttribute("user");
         order.setUserId(currentUser.getId());
+        orderRepo.save(order);
+
         String message = "📦 Новый заказ!\n\n"
-                + "1. Ссылка:   " + order.getLink() + "\n"
-                + "2. Размер:   " + order.getSize() + "\n"
-                + "3. Цвет:   " + order.getColor() + "\n\n"
+                + "1. ID заказа: " + order.getId() + "\n"
+                + "2. Ссылка: " + order.getLink() + "\n"
+                + "3. Размер: " + order.getSize() + "\n"
+                + "4. Цвет: " + order.getColor() + "\n\n"
                 + "От пользователя '" + currentUser.getName() + "' с id: " + currentUser.getId();
 
         String jsonOrder = gson.toJson(Map.of(
                 "chat_id", chatId,
                 "text", message
         ));
-        orderRepo.save(order);
         sendMessageToTelegram(jsonOrder);
-        return "profile";
+
+        Map<String, String> response = new HashMap<>();
+        response.put("status", "success");
+        return ResponseEntity.ok(response);
     }
+
 
     private void sendMessageToTelegram(String jsonOrder) {
         String url = "https://api.telegram.org/bot" + botToken + "/sendMessage";
