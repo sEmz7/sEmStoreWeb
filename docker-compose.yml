@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres
+    container_name: semstore-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5433:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - semstore-network
+
+  app:
+    build: .
+    container_name: semstore-app
+    ports:
+      - "8089:8080"
+    depends_on:
+      - db
+    env_file:
+      - .env
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+    networks:
+      - semstore-network
+
+volumes:
+  db-data:
+
+networks:
+  semstore-network:
