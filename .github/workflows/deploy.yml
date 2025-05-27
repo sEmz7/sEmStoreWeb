@@ -31,7 +31,7 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
             cd /semstoreweb/app/sEmStoreWeb
-            git pull origin main
+            git pull
             ./mvnw clean package -DskipTests
             docker-compose down
             docker-compose up -d --build
