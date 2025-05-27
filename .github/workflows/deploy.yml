@@ -11,6 +11,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Make mvnw executable
+        run: chmod +x ./mvnw
+
       - name: Build Spring Boot jar
         run: ./mvnw clean package -DskipTests
 
