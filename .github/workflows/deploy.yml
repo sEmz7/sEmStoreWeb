@@ -32,6 +32,6 @@ jobs:
           script: |
             cd /semstoreweb/app/sEmStoreWeb
             git pull
-            ./mvnw clean package -DskipTests
+            mvn clean package
             docker-compose down
             docker-compose up -d --build
